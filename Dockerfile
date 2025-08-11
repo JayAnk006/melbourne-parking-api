@@ -12,5 +12,5 @@ RUN R -e "install.packages(c('httr', 'dplyr', 'jsonlite'), repos='https://cran.r
 # Expose port
 EXPOSE $PORT
 
-# Start the application - simplified
-CMD ["R", "-e", "library(plumber); pr('api.R') %>% pr_run(host='0.0.0.0', port=as.numeric(Sys.getenv('PORT', '8000')))"]
+# Use our main.R file which is already configured for cloud deployment
+CMD ["R", "-e", "source('main.R')"]
