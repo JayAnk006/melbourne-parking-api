@@ -9,11 +9,12 @@ COPY . .
 # Install additional packages
 RUN R -e "install.packages(c('httr', 'dplyr', 'jsonlite'), repos='https://cran.rstudio.com/')"
 
-# Override the default plumber entrypoint
+# Completely override the plumber image's behavior
 ENTRYPOINT []
+CMD []
 
 # Expose port
 EXPOSE $PORT
 
-# Use our main.R file directly
-CMD ["Rscript", "main.R"]
+# Run our main.R file directly
+CMD ["R", "--slave", "-f", "main.R"]
