@@ -1,6 +1,12 @@
-# Load plumber library
+# main.R - Heroku-compatible
 library(plumber)
 
-# Start the API from the api.R file (contains both parking and prediction)
+# Heroku provides PORT environment variable
+port <- as.numeric(Sys.getenv("PORT", "8000"))
+
+cat("Starting Melbourne Parking API on Heroku...\n")
+cat("Port:", port, "\n")
+
+# Start the API
 pr("api.R") %>% 
-  pr_run(port = 8000)
+  pr_run(host = "0.0.0.0", port = port)
