@@ -9,8 +9,11 @@ COPY . .
 # Install additional packages
 RUN R -e "install.packages(c('httr', 'dplyr', 'jsonlite'), repos='https://cran.rstudio.com/')"
 
+# Override the default plumber entrypoint
+ENTRYPOINT []
+
 # Expose port
 EXPOSE $PORT
 
-# Use our main.R file which is already configured for cloud deployment
-CMD ["R", "-e", "source('main.R')"]
+# Use our main.R file directly
+CMD ["Rscript", "main.R"]
